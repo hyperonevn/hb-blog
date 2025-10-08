@@ -26,7 +26,7 @@ const Header = (): JSX.Element => {
         <div>
           <Link href={`/${locale}/`} aria-label={siteMetadata.headerTitle}>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8"> {/* 👈 logo nhỏ lại cực nhiều */}
+              <div className="w-2 h-2"> {/* 👈 logo nhỏ lại cực nhiều */}
                 <Logo />
               </div>
               {typeof siteMetadata.headerTitle === 'string' ? (
