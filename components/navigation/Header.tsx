@@ -8,6 +8,7 @@ import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { motion } from 'framer-motion'
 import { useParams, usePathname } from 'next/navigation'
 import type { JSX } from 'react'
+
 import LangSwitch from '../langswitch'
 import Link from '../mdxcomponents/Link'
 import SearchButton from '../search/SearchButton'
@@ -23,22 +24,23 @@ const Header = (): JSX.Element => {
   return (
     <header>
       <div className="flex items-center justify-between py-6">
+        {/* ==== Logo + Title ==== */}
         <div>
           <Link href={`/${locale}/`} aria-label={siteMetadata.headerTitle}>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-h-auto"> {/* 👈 logo nhỏ lại cực nhiều */}
+              {/* Logo */}
+              <div className="w-8 h-auto">
                 <Logo />
               </div>
-              {typeof siteMetadata.headerTitle === 'string' ? (
-                <div className="hidden text-lg font-semibold sm:block">
-                  {siteMetadata.headerTitle}
-                </div>
-              ) : (
-                siteMetadata.headerTitle
-              )}
+              {/* Title hiển thị từ siteMetadata */}
+              <div className="hidden text-lg font-semibold sm:block">
+                {siteMetadata.headerTitle}
+              </div>
             </div>
           </Link>
         </div>
+
+        {/* ==== Navigation Menu ==== */}
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           {headerNavLinks
             .filter((link) => link.href !== '/')
@@ -51,24 +53,26 @@ const Header = (): JSX.Element => {
                   className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
                 >
                   <div
-                    className={`hidden font-medium ${
+                    className={`hidden font-medium relative rounded-md px-2 py-1 transition-colors sm:block ${
                       isSelected
                         ? 'text-heading-500'
                         : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
-                    } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
+                    }`}
                   >
-                    <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
-                    {isSelected ? (
+                    <span className="relative z-10">{t(link.title.toLowerCase())}</span>
+                    {isSelected && (
                       <motion.span
                         layoutId="tab"
                         transition={{ type: 'spring', duration: 0.4 }}
                         className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
                       />
-                    ) : null}
+                    )}
                   </div>
                 </Link>
               )
             })}
+
+          {/* ==== Right-side controls ==== */}
           <AuthorsMenu className="hidden sm:block" />
           <SearchButton />
           <ThemeSwitch />
