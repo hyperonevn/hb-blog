@@ -24,26 +24,18 @@ const Header = (): JSX.Element => {
     <header>
       <div className="flex items-center justify-between py-10">
         <div>
-          <Link href={`/${locale}/`} aria-label={siteMetadata.headerTitle}>
+          <Link href={`/${locale}/`} aria-label="HYPER ONE">
             <div className="flex items-center justify-between">
               <div className="mr-3">
-                <Logo />
+                <Logo className="h-8 w-auto" />
               </div>
-              {typeof siteMetadata.headerTitle === 'string' ? (
-                <div className="hidden h-6 text-2xl font-semibold sm:block">
-                  {siteMetadata.headerTitle}
-                </div>
-              ) : (
-                siteMetadata.headerTitle
-              )}
+              <div className="hidden h-6 text-2xl font-semibold sm:block">HYPER ONE</div>
             </div>
           </Link>
         </div>
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           {headerNavLinks
-            .filter((link) => {
-              return link.href !== '/'
-            })
+            .filter((link) => link.href !== '/')
             .map((link) => {
               const isSelected = pathname.includes(link.href as string)
               return (
@@ -57,7 +49,7 @@ const Header = (): JSX.Element => {
                       isSelected
                         ? 'text-heading-500'
                         : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
-                    } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
+                    } relative rounded-md px-2 py-1 transition-colors sm:block`}
                   >
                     <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
                     {isSelected ? (
