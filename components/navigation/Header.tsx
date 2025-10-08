@@ -22,14 +22,20 @@ const Header = (): JSX.Element => {
 
   return (
     <header>
-      <div className="flex items-center justify-between py-10">
+      <div className="flex items-center justify-between py-6">
         <div>
-          <Link href={`/${locale}/`} aria-label="HYPER ONE">
-            <div className="flex items-center justify-between">
-              <div className="mr-3">
-                <Logo className="h-8 w-auto" />
+          <Link href={`/${locale}/`} aria-label={siteMetadata.headerTitle}>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8"> {/* 👈 logo nhỏ lại cực nhiều */}
+                <Logo />
               </div>
-              <div className="hidden h-6 text-2xl font-semibold sm:block">HYPER ONE</div>
+              {typeof siteMetadata.headerTitle === 'string' ? (
+                <div className="hidden text-lg font-semibold sm:block">
+                  {siteMetadata.headerTitle}
+                </div>
+              ) : (
+                siteMetadata.headerTitle
+              )}
             </div>
           </Link>
         </div>
@@ -49,7 +55,7 @@ const Header = (): JSX.Element => {
                       isSelected
                         ? 'text-heading-500'
                         : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
-                    } relative rounded-md px-2 py-1 transition-colors sm:block`}
+                    } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
                     <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
                     {isSelected ? (
