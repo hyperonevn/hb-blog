@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'HyperOneBlog',
   author: 'Hyper One Team',
-  headerTitle: 'HyperOneBlog',
+  headerTitle: 'HyperOneBlo',
   description: 'Powered by Hyper One',
   language: 'en',
   theme: 'system', // system, dark or light
